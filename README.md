@@ -1,17 +1,17 @@
 # Zabbix VmBix Module ![alt text](https://travis-ci.org/dav3860/vmbix_zabbix_module.svg?branch=master "Build Status")
 
 ## Description
-Zabbix 2.2+ comes with support of loadable modules for extending Zabbix agent and server without sacrificing performance.
+ZO Zabbix 2.2+ vem com suporte de módulos carregáveis ​​para estender o agente eo servidor Zabbix sem sacrificar o desempenho.
 
-A loadable module is basically a shared library used by Zabbix server or agent and loaded on startup. The library should contain certain functions, so that a Zabbix process may detect that the file is indeed a module it can load and work with.
+Um módulo carregável é basicamente uma biblioteca compartilhada usada pelo servidor Zabbix ou agente e carregado na inicialização. A biblioteca deve conter certas funções, de modo que um processo Zabbix pode detectar que o arquivo é de fato um módulo com o qual ele pode carregar e trabalhar.
 
-I have created a module to query the [VmBix](https://github.com/dav3860/vmbix) daemon, used to monitor a VMWare infrastructure with Zabbix.
+Eu criei um módulo para consultar o VmBix daemon, usado para monitorar uma infra-estrutura VMWare com Zabbix.
 
 ## Install
-Get the latest version [here](https://bintray.com/dav3860/generic/vmbix-zabbix-module/view#files)
-By default, the packages will create a /etc/zabbix/zabbix_agentd.d/modules.conf file to enable the module. Configure it for the server or the proxy if needed (see the Configure section).
+Obtenha a última versão [aqui](https://bintray.com/dav3860/generic/vmbix-zabbix-module/view#files)
+Por padrão, os pacotes irá criar um arquivo /etc/zabbix/zabbix_agentd.d/modules.conf para permitir que o módulo. Configurá-lo para o servidor ou o proxy, se necessário (consulte a seção Configurar).
 
-## Or build from source
+## Ou criar a partir da fonte
 You need to download the Zabbix source and configure the environment :
 
 ```
@@ -68,13 +68,13 @@ LoadModulePath=/usr/lib/zabbix/modules
 LoadModule=vmbix.so
 ```
 
-By default, the packages will create a /etc/zabbix/zabbix_agentd.d/modules.conf file with parameters above.
+Por padrão, os pacotes criarão um arquivo /etc/zabbix/zabbix_agentd.d/modules.conf com os parâmetros acima.
 
-And restart the agent or server/proxy.
+E reinicie o agente ou servidor / proxy.
 
-By default, the module will query VmBix on localhost and port 12050. You can create a configuration file /etc/zabbix/vmbix_module.conf if you want to change this. A sample configuration file is provided.
+Por padrão, o módulo consultará VmBix no localhost e na porta 12050. Você pode criar um arquivo de configuração /etc/zabbix/vmbix_module.conf se você quiser alterar isso. Um arquivo de configuração de exemplo é fornecido.
 
-You can test it like this for example if you configured a Zabbix agent to load the module :
+Você pode testá-lo como este, por exemplo, se você configurou um agente Zabbix para carregar o módulo:
 
 ```
 [TEST zbx_vmbix]# zabbix_agentd -t vmbix[version]
@@ -83,7 +83,7 @@ You can test it like this for example if you configured a Zabbix agent to load t
 vmbix[vm.guest.os,VM01]                  [s|Red Hat Enterprise Linux 6 (64 bits)]
 ```
 
-Or if VmBix is configured to use the UUID to reference the objects (useuuid parameter) :
+Ou se VmBix estiver configurado para usar o UUID para fazer referência aos objetos (parâmetro useuuid):
 
 ```
 [TEST zbx_vmbix]# zabbix_agentd -t "vmbix[vm.discovery,*]"
